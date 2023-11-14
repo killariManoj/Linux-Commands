@@ -252,3 +252,113 @@ systemctl
 ```
 nslookup
 ```
+### Identifying and Mounting a Drive using the Linux Terminal :
+
+* To Identify the USB drive
+```
+lsblk
+```
+* Create a directory to mount the USB drive into
+```
+sudo mkdir /media/pendrive
+```
+* Mounting the USB drive to the /media/pendrive directory using the mount command
+```
+syntax: sudo mount /path/to/drive /path/to/mountpoint.
+> sudo mount /dev/sdb1 /media/pendrive
+```
+* Check the drive has been mounted by re-running
+```
+lsblk
+```
+* Unmount the drive using umount command
+```
+sudo umount /media/pendrive
+```
+* Check the drive is unmounted using
+```
+lsblk
+```
+## Formatting Disk Partition in Linux :
+* There are three ways to format disk partitions using the mkfs command, depending on the file system type:
+    * ext4
+    * FAT32
+    * NTFS
+* The general syntax for formatting disk partitions in Linux is:
+```
+mkfs [options] [-t type fs-options] device [size]
+```
+#### Formatting Disk Partition with ext4 File System :
+* Format a disk partition with the ext4 file system
+```
+sudo mkfs -t ext4 /dev/sdb1
+```
+* To verify the file system change
+```
+lsblk -f
+```
+#### Formatting Disk Partition with FAT32 File System :
+* To format a disk with a FAT32 file system
+```
+sudo mkfs -t vfat /dev/sdb1
+```
+* To verify the file system change
+```
+lsblk -f
+```
+#### Formatting Disk Partition with NTFS File System :
+* Format a disk partition with the NTFS file system
+```
+sudo mkfs -t ntfs /dev/sdb1
+```
+* To verify the file system change
+```
+lsblk -f
+```
+## Partition a Disk Using fdisk Command :
+* To list all existing partitions
+```
+sudo fdisk -l
+```
+* Select the storage disk you want to create partitions
+```
+sudo fdisk /dev/sdb
+```
+>The /dev/sdb storage disk is open
+
+* To Create a New Partition.
+    * Run the  `n` command to create a new partition.
+    * Select the partition number by typing the default number (2).
+    * After that, you are asked for the starting and ending sector of your hard drive. It is best to type the default number in this section (3622912).
+    * The last prompt is related to the size of the partition. You can choose to have several sectors or to set the size in megabytes or gigabytes. Type `+2GB` to set the size of the partition to 2GB.
+    
+* Write on Disk :
+>The system created the partition, but the changes are not written on the disk.
+* To write the changes on disk, run this command
+```
+w
+```
+* To Verify that the partition is created
+```
+sudo fdisk -l
+```
+#### Format the Partition
+* To Format the Partition
+```
+sudo mkfs -t ext4 /dev/sdb1
+```
+#### Mount the Partition
+>To begin interacting with the disk, need to create a mount point and mount the partition to it.
+
+* Create a mount point by running the following command:
+```
+sudo mkdir -p /mt/sdb1
+```
+* After that, mount the partition by entering:
+```
+sudo mount -t auto /dev/sbd1 /mt/sdb1
+```
+* To Verify if partition is mounted 
+```
+df hT
+```
