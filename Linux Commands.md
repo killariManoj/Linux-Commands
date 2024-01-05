@@ -362,3 +362,16 @@ sudo mount -t auto /dev/sbd1 /mt/sdb1
 ```
 df hT
 ```
+#### these mount steps from notes are temporary once we reboot the system it gets unmounted. To make it persistent we need to mention in file /etc/fstab
+---
+---
+---
+* This is the file responsible for mounting shares in our Linux conval machines.
+```
+/etc/fstab
+```
+* This line from that file will mount the shares.
+```
+//elements.local/FW/ /mnt/nsg cifs _netdev,credentials=/home/remlab/.smbcredentials,uid=1004,forceuid,gid=1004,forcegid,vers=3.0,sec=ntlmssp 0 0
+```
+
