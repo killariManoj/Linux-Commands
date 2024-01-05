@@ -370,8 +370,5 @@ df hT
 ```
 /etc/fstab
 ```
-* This line from that file will mount the shares.
-```
-//elements.local/FW/ /mnt/nsg cifs _netdev,credentials=/home/remlab/.smbcredentials,uid=1004,forceuid,gid=1004,forcegid,vers=3.0,sec=ntlmssp 0 0
-```
+
 
